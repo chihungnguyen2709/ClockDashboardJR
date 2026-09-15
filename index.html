@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" class=""><head class="">
+    
+    
+    <!-- Google tag (gtag.js) -->
+<script async="" src="www.googletagmanager.com/gtag/js" class=""></script>
+<script class="">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6K6ZZD7F8');
+</script>
+    
+    
+<meta charset="UTF-8" class="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" class="" />
+<title class="">Đồng hồ Online – Clock &amp; Dashboard</title>
+<meta name="description" content="Đồng hồ trực tuyến." class="" />
+<meta name="author" content="Chuan" class="" />
+<meta name="robots" content="index, follow" class="" />
+<meta name="theme-color" content="#020202" class="" />
+<meta name="mobile-web-app-capable" content="yes" class="" />
+<meta name="apple-mobile-web-app-capable" content="yes" class="" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" class="" />
+<meta name="apple-mobile-web-app-title" content="Clock Wallpaper" class="" />
+<link rel="manifest" href="clockwallpaper.com/manifest.json" class="" />
+<link rel="canonical" href="avisionboard.com/" class="" />
+<meta property="og:type" content="website" class="" />
+<meta property="og:url" content="https://clockwallpaper.com/" class="" />
+<meta property="og:title" content="Clock Wallpaper Online – Live Aesthetic Flip Clock" class="" />
+<meta property="og:description" content="Beautiful free clock wallpaper for your browser." class="" />
+<meta property="og:image" content="https://clockwallpaper.com/og-preview.jpg" class="" />
+<meta name="twitter:card" content="summary_large_image" class="" />
+<meta name="twitter:title" content="Clock Wallpaper Online – Live Aesthetic Flip Clock" class="" />
+<meta name="twitter:image" content="https://clockwallpaper.com/og-preview.jpg" class="" />
+<link rel="preconnect" href="fonts.googleapis.com/" class="" />
+<link rel="preconnect" href="fonts.gstatic.com/" crossorigin="" class="" />
+<link href="fonts.googleapis.com/css2" rel="stylesheet" class="" />
+
+<style class="">
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+:root {
+    --text-primary: #efefef;
+    --text-dim: rgba(255,255,255,0.32);
+    --blur: 36px;
+    --radius: clamp(10px, 1.6vw, 18px);
+    --gap: clamp(7px, 1vw, 13px);
+    --pad: clamp(10px, 1.4vw, 18px);
+}
+
+html { height: 100%; }
+body {
+    min-height: 100%;
+    background: #010101;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+body::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.025; mix-blend-mode: overlay;
+}
+
+.app {
+    position: relative; z-index: 2;
+    width: min(1020px, 93vw);
+    display: grid;
+    grid-template-columns: 1.9fr 1fr;
+    gap: var(--gap);
+    padding: var(--gap) 0;
+}
+
+.col-left  { display: flex; flex-direction: column; gap: var(--gap); }
+.col-right { display: flex; flex-direction: column; gap: var(--gap); }
+.row-split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+
+.glass {
+    background: linear-gradient(140deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.012) 100%);
+    backdrop-filter: blur(var(--blur)) saturate(1.4);
+    -webkit-backdrop-filter: blur(var(--blur)) saturate(1.4);
+    border: 1px solid rgba(255,255,255,0.13);
+    border-top: 1px solid rgba(255,255,255,0.22);
+    border-radius: var(--radius);
+    box-shadow:
+        0 40px 80px -12px rgba(0,0,0,0.92),
+        0 12px 32px -6px rgba(0,0,0,0.75),
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        inset 0 -1px 0 rgba(0,0,0,0.25);
+    overflow: hidden;
+    position: relative;
+    transform: translateZ(0);
+}
+
+/* DATE PANEL */
+.date-panel {
+    padding: var(--pad) clamp(14px, 2.5vw, 32px);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px;
+}
+.day-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(18px, 2.8vw, 32px);
+    letter-spacing: 6px; line-height: 1;
+}
+.full-date {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(8px, 0.85vw, 10px);
+    color: var(--text-dim); margin-top: 4px;
+}
+.year-progress { flex: 1; min-width: 160px; max-width: 340px; margin-left: clamp(8px, 2.5vw, 40px); }
+.year-label {
+    font-size: 9px; font-family: 'Space Mono'; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--text-dim); margin-bottom: 9px; line-height: 1.55;
+}
+.year-label .yr-main {
+    font-family: 'Bebas Neue', sans-serif;
+    color: rgba(255,255,255,0.88);
+    font-size: clamp(15px, 1.6vw, 20px);
+    letter-spacing: 2px; line-height: 1.2; display: block;
+}
+.bar-track {
+    height: 2px; background: rgba(255,255,255,0.07); border-radius: 10px;
+    position: relative; overflow: visible;
+}
+.bar-fill {
+    height: 100%; border-radius: 10px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.25), rgba(255,255,255,0.85));
+    transition: width 1s ease; position: relative;
+    box-shadow: 0 0 8px 1px rgba(255,255,255,0.35), 0 0 18px 3px rgba(255,255,255,0.12);
+}
+.bar-fill::after {
+    content: '';
+    position: absolute; right: -1px; top: 50%; transform: translateY(-50%);
+    width: 6px; height: 6px; border-radius: 50%; background: #fff;
+    box-shadow: 0 0 6px 2px rgba(255,255,255,0.7), 0 0 16px 4px rgba(255,255,255,0.3);
+    animation: dotPulse 2s ease-in-out infinite;
+}
+@keyframes dotPulse {
+    0%,100% { box-shadow: 0 0 6px 2px rgba(255,255,255,0.7), 0 0 16px 4px rgba(255,255,255,0.3); }
+    50%      { box-shadow: 0 0 10px 4px rgba(255,255,255,0.9), 0 0 28px 8px rgba(255,255,255,0.18); }
+}
+
+/* CLOCK */
+.clock-panel {
+    padding: clamp(16px, 2.5vw, 32px);
+    display: flex; align-items: center; justify-content: center;
+}
+.clock-row { display: flex; align-items: center; gap: clamp(5px, 1.2vw, 12px); justify-content: center; }
+.flip-card {
+    width: clamp(80px, 11vw, 150px);
+    height: clamp(118px, 16vw, 220px);
+    background: rgba(255,255,255,0.035);
+    border: 1px solid rgba(255,255,255,0.055);
+    border-radius: clamp(10px, 1.6vw, 18px);
+    position: relative;
+}
+.card-face {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(58px, 9vw, 140px);
+}
+.divider { position: absolute; top: 50%; width: 100%; height: 1px; background: rgba(0,0,0,0.55); z-index: 10; }
+.unit-label {
+    font-family: 'Space Mono'; font-size: clamp(6px, 0.65vw, 8px);
+    color: var(--text-dim); margin-top: 8px; letter-spacing: 3px; text-align: center;
+}
+.colon {
+    font-family: 'Bebas Neue';
+    font-size: clamp(46px, 7vw, 96px);
+    opacity: 0.25;
+    padding-bottom: clamp(12px, 1.8vw, 24px);
+    animation: blink 1s infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* PANEL TITLE */
+.panel-title {
+    font-family: 'Space Mono'; font-size: 9px; text-transform: uppercase;
+    letter-spacing: 3px; color: var(--text-dim);
+    border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+/* FOCUS LIST */
+.focus-panel { padding: var(--pad); display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.todo-list {
+    display: flex; flex-direction: column; gap: 6px;
+    overflow-y: auto; flex: 1; max-height: 280px;
+}
+.todo-list::-webkit-scrollbar { width: 3px; }
+.todo-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+.todo-item {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 8px 11px; border-radius: 9px;
+    font-size: clamp(10px, 1vw, 12px);
+    display: flex; align-items: center; gap: 9px;
+    cursor: pointer; transition: background 0.25s;
+}
+.todo-item:hover { background: rgba(255,255,255,0.07); }
+.todo-check {
+    width: 12px; height: 12px;
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 3px; flex-shrink: 0; transition: background 0.2s;
+}
+.done .todo-check { background: rgba(255,255,255,0.7); border-color: transparent; }
+.done .editable-task { text-decoration: line-through; opacity: 0.35; }
+.editable-task { flex: 1; outline: none; cursor: text; }
+.editable-task:focus { border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 1px; }
+.btn-icon { background: none; border: none; color: rgba(255,255,255,0.2); cursor: pointer; font-size: 12px; transition: color 0.2s; flex-shrink: 0; }
+.btn-icon:hover { color: rgba(255,255,255,0.7); }
+.btn-add { font-size: 17px; color: var(--text-dim); }
+.btn-add:hover { color: #fff; }
+
+/* EXCHANGE */
+.exchange-links { display: flex; gap: 6px; padding-top: 2px; }
+.ex-btn {
+    flex: 1; text-align: center; text-decoration: none;
+    padding: 6px 4px; border-radius: 8px;
+    font-family: 'Space Mono'; font-size: clamp(8px, 0.85vw, 10px);
+    font-weight: 600; letter-spacing: 1px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    color: rgba(255,255,255,0.4);
+    transition: color 0.2s, border-color 0.2s, transform 0.15s;
+}
+.ex-btn:hover { color: #fff; border-color: rgba(255,255,255,0.25); transform: translateY(-1px); }
+
+/* AMBIENCE */
+.ambience-panel { padding: var(--pad); display: flex; flex-direction: column; gap: 10px; }
+.yt-open-btn {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text-dim); border-radius: 6px; padding: 2px 8px;
+    font-family: 'Space Mono'; font-size: 9px; cursor: pointer; transition: 0.2s;
+}
+.yt-open-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.yt-open-btn.playing { color: #fff; border-color: rgba(255,255,255,0.35); }
+
+/* AMBIENCE MODAL */
+.yt-modal-backdrop {
+    display: none; position: fixed; inset: 0; z-index: 100;
+    background: rgba(0,0,0,0.65); backdrop-filter: blur(5px);
+    align-items: center; justify-content: center;
+}
+.yt-modal-backdrop.open { display: flex; }
+.yt-modal {
+    background: linear-gradient(140deg, rgba(18,18,18,0.99), rgba(8,8,8,0.99));
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 18px;
+    padding: 22px; width: min(400px, 90vw);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.85);
+}
+.yt-modal-header {
+    font-family: 'Space Mono'; font-size: 9px; text-transform: uppercase;
+    letter-spacing: 3px; color: var(--text-dim);
+    margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;
+}
+.yt-close { background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 16px; transition: color 0.2s; }
+.yt-close:hover { color: #fff; }
+.yt-slots { display: flex; flex-direction: column; gap: 9px; margin-bottom: 14px; }
+.yt-slot {
+    display: flex; flex-direction: column; gap: 4px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 8px 10px;
+}
+.yt-slot-top { display: flex; align-items: center; gap: 7px; }
+.yt-slot-btn {
+    flex-shrink: 0; width: 28px; height: 28px; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05);
+    color: #fff; font-family: 'Space Mono'; font-size: 9px;
+    cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center;
+}
+.yt-slot-btn:hover  { background: rgba(255,255,255,0.15); }
+.yt-slot-btn.active { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.5); }
+.yt-slot-name {
+    flex: 1; background: none; border: none; color: rgba(255,255,255,0.75);
+    font-family: 'DM Sans'; font-size: 12px; font-weight: 500; outline: none; min-width: 0;
+    padding: 0; cursor: text;
+}
+.yt-slot-name::placeholder { color: rgba(255,255,255,0.2); font-style: italic; }
+.yt-slot-name.active-name { color: #fff; }
+.yt-slot-clear { background: none; border: none; color: rgba(255,255,255,0.25); cursor: pointer; font-size: 12px; padding: 2px 3px; transition: color 0.2s; flex-shrink: 0; }
+.yt-slot-clear:hover { color: rgba(255,255,255,0.7); }
+.yt-slot-input {
+    width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    padding: 5px 8px; border-radius: 6px; color: rgba(255,255,255,0.45);
+    font-family: 'Space Mono'; font-size: 9px; outline: none; letter-spacing: 0.3px;
+}
+.yt-slot-input::placeholder { color: rgba(255,255,255,0.18); }
+.yt-slot-input:focus { border-color: rgba(255,255,255,0.35); color: rgba(255,255,255,0.8); }
+.yt-preview { background: #000; border-radius: 10px; overflow: hidden; height: 150px; }
+.yt-preview iframe { display: block; width: 100%; height: 100%; }
+
+/* PHOTO */
+.photo-panel { padding: var(--pad); display: flex; flex-direction: column; gap: 10px; height: clamp(200px, 26vw, 320px); }
+.photo-container {
+    flex: 1; border-radius: 12px; border: 1px dashed rgba(255,255,255,0.18);
+    background-size: cover; background-position: center; background-color: rgba(0,0,0,0.15);
+    position: relative; display: flex; align-items: center; justify-content: center;
+    overflow: hidden; transition: border-color 0.3s;
+}
+.photo-container:hover { border-color: rgba(255,255,255,0.45); }
+.upload-overlay {
+    position: absolute; inset: 0; background: rgba(0,0,0,0.35);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s; cursor: pointer;
+    font-family: 'Space Mono'; font-size: clamp(8px, 1vw, 10px); color: var(--text-dim);
+}
+.photo-container:hover .upload-overlay { opacity: 1; }
+@media (hover: none) {
+    .photo-container:not([style*="url"]) .upload-overlay { opacity: 1; }
+}
+#photo-input { display: none; }
+
+/* CALENDAR */
+.calendar-panel { padding: var(--pad); display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.cal-header { display: flex; justify-content: space-between; align-items: center; }
+.cal-nav { background: none; border: none; color: rgba(255,255,255,0.45); cursor: pointer; font-size: 14px; padding: 4px; transition: color 0.2s; }
+.cal-nav:hover { color: #fff; }
+.cal-month-year { font-family: 'Bebas Neue'; font-size: clamp(14px, 1.8vw, 19px); letter-spacing: 2px; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: clamp(2px, 0.4vw, 4px); text-align: center; }
+.cal-day-name { font-family: 'Space Mono'; font-size: clamp(6px, 0.65vw, 8px); color: var(--text-dim); margin-bottom: 3px; }
+.cal-day {
+    aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+    border-radius: 5px; font-size: clamp(8px, 0.9vw, 10px); cursor: pointer; transition: background 0.2s;
+    border: 1px solid transparent; background: rgba(255,255,255,0.02);
+}
+.cal-day:hover { background: rgba(255,255,255,0.1); }
+.cal-day.today { border-color: rgba(255,255,255,0.3); font-weight: bold; }
+.cal-day.other-month { opacity: 0.22; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+    .app { grid-template-columns: 1fr 1fr; width: 97vw; }
+}
+@media (max-width: 680px) {
+    :root { --gap: 8px; --pad: 12px; }
+    .app {
+        grid-template-columns: 1fr;
+        width: 100%;
+        padding: 8px max(10px, env(safe-area-inset-left)) calc(20px + env(safe-area-inset-bottom, 0px)) max(10px, env(safe-area-inset-right));
+    }
+    /* Tất cả section xếp 1 cột dọc */
+    .row-split  { grid-template-columns: 1fr; }
+    .col-right  { flex-direction: column; }
+
+    .date-panel { flex-direction: column; align-items: flex-start; }
+    .year-progress { margin-left: 0; width: 100%; max-width: 100%; }
+
+    /* Clock vừa mobile */
+    .flip-card  { width: clamp(72px, 21vw, 110px); height: clamp(106px, 31vw, 158px); }
+    .card-face  { font-size: clamp(52px, 15vw, 98px); }
+    .colon      { font-size: clamp(38px, 11vw, 70px); }
+
+    /* Photo */
+    .photo-panel { height: 200px; }
+
+    /* Calendar */
+    .cal-day      { font-size: 11px; }
+    .cal-day-name { font-size: 8px; }
+
+    /* Modal bottom sheet */
+    .yt-modal-backdrop { align-items: flex-end; }
+    .yt-modal {
+        width: 100%; max-width: 100%;
+        border-radius: 18px 18px 0 0;
+        padding: 20px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+        max-height: 88vh; overflow-y: auto;
+    }
+    .yt-preview { height: 140px; }
+}
+@media (min-width: 1440px) {
+    .app { width: min(1120px, 90vw); }
+}
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body class="">
+
+<canvas id="bg" aria-hidden="true" width="934" height="743" class=""></canvas>
+
+<main class="app">
+
+    <section class="col-left">
+
+        <header class="glass date-panel">
+            <div class="">
+                <h1 class="day-name" id="day">THỨ BA</h1>
+                <p class="full-date" id="date">NGÀY 15 THÁNG 9 NĂM 2026</p>
+            </div>
+            <div class="year-progress">
+                <div class="year-label">
+                    <div class="yr-main" id="yearMsg">BẠN CÒN 29.3% TRONG NĂM 2026</div>
+                </div>
+                <div class="bar-track"><div class="bar-fill" id="bar" style="width: 70.65%;"></div></div>
+            </div>
+        </header>
+
+        <article class="glass clock-panel">
+            <div class="clock-row">
+                <div class="">
+                    <div class="flip-card"><div class="divider"></div><div class="card-face" id="hh">21</div></div>
+                    <div class="unit-label">GIỜ</div>
+                </div>
+                <div class="colon">:</div>
+                <div class="">
+                    <div class="flip-card"><div class="divider"></div><div class="card-face" id="mm">10</div></div>
+                    <div class="unit-label">PHÚT</div>
+                </div>
+                <div class="colon">:</div>
+                <div class="">
+                    <div class="flip-card"><div class="divider"></div><div class="card-face" id="ss">28</div></div>
+                    <div class="unit-label">GIÂY</div>
+                </div>
+            </div>
+            <time id="sr-time" class="sr-only" aria-live="polite">9:10:28 PM</time>
+        </article>
+
+        <div class="row-split">
+
+            <section class="glass focus-panel">
+                <div class="panel-title">
+                    <span class="">Focus List</span>
+                    <button class="btn-icon btn-add" onclick="addTask()" title="Add task">+</button>
+                </div>
+                <div class="todo-list" id="todo-list" role="list"></div>
+                <div class="exchange-links">
+                    <a href="https://www.facebook.com/chihungnguyen2644" target="_blank" rel="noopener" class="ex-btn">Facebook</a>
+                    <a href="https://www.instagram.com/nch.hungg/" target="_blank" rel="noopener" class="ex-btn">Instagram</a>
+                    <a href="https://avisionboard.com/" target="_blank" rel="noopener" class="ex-btn">Vision Board</a>
+                </div>
+            </section>
+
+            <section class="glass ambience-panel">
+                <div class="panel-title">
+                    <span class="">Trình Nghe Nhạc (YouTube)</span>
+                    <button class="yt-open-btn playing" id="ytOpenBtn" onclick="openYtModal()">♪ Tracks</button>
+                </div>
+                <div style="flex:1;background:#000;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);min-height:clamp(120px,15vw,170px);" class="">
+                    <iframe id="player" width="100%" height="100%" src="https://www.youtube.com/embed/iHns46ib0bM?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" loading="lazy" class=""></iframe>
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+    <aside class="col-right">
+
+        <section class="glass photo-panel">
+            <h2 class="panel-title">Khung Ảnh cá nhân</h2>
+            <div class="photo-container" id="photoContainer" style="background-image: url(&quot;blob:https://clockwallpaper.com/140acf7b-3bda-4c43-ad76-8a7c95c47fb0&quot;);">
+                <div class="upload-overlay" onclick="document.getElementById('photo-input').click()" role="button" tabindex="0">
+                    + Upload
+                </div>
+                <input type="file" id="photo-input" accept="image/*" onchange="handlePhotoUpload(event)" __h2d_shadowroot="114" class="" />
+            </div>
+        </section>
+
+        <section class="glass calendar-panel">
+            <div class="cal-header">
+                <button class="cal-nav" onclick="changeMonth(-1)">❮</button>
+                <h2 class="cal-month-year" id="calMonthYear">THÁNG 9 NĂM 2026</h2>
+                <button class="cal-nav" onclick="changeMonth(1)">❯</button>
+            </div>
+            <div class="cal-grid">
+                <div class="cal-day-name">CN</div><div class="cal-day-name">T2</div>
+                <div class="cal-day-name">T3</div><div class="cal-day-name">T4</div>
+                <div class="cal-day-name">T5</div><div class="cal-day-name">T6</div>
+                <div class="cal-day-name">T7</div>
+            </div>
+            <div class="cal-grid" id="calGrid"><div class="cal-day other-month">30</div><div class="cal-day other-month">31</div><div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day today">15</div><div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div><div class="cal-day other-month">1</div><div class="cal-day other-month">2</div><div class="cal-day other-month">3</div></div>
+        </section>
+
+    </aside>
+
+</main>
+
+<div class="yt-modal-backdrop" id="ytModalBackdrop" onclick="closeYtModal(event)">
+    <div class="yt-modal" onclick="event.stopPropagation()">
+        <div class="yt-modal-header">
+            <span class="">Trình Nghe Nhạc (YouTube)</span>
+            <button class="yt-close" onclick="closeYtModal()">✕</button>
+        </div>
+        <div class="yt-slots" id="ytSlots"><div class="yt-slot"><div class="yt-slot-top"><button class="yt-slot-btn active" title="Play">▶</button><input type="text" class="yt-slot-name active-name" placeholder="Track 1 name…" __h2d_shadowroot="227" /><button class="yt-slot-clear" style="visibility: visible;">✕</button></div><input type="url" class="yt-slot-input" placeholder="YouTube URL…" __h2d_shadowroot="235" /></div><div class="yt-slot"><div class="yt-slot-top"><button class="yt-slot-btn" title="Play">2</button><input type="text" class="yt-slot-name" placeholder="Track 2 name…" __h2d_shadowroot="245" /><button class="yt-slot-clear" style="visibility: visible;">✕</button></div><input type="url" class="yt-slot-input" placeholder="YouTube URL…" __h2d_shadowroot="253" /></div><div class="yt-slot"><div class="yt-slot-top"><button class="yt-slot-btn" title="Play">3</button><input type="text" class="yt-slot-name" placeholder="Track 3 name…" __h2d_shadowroot="263" /><button class="yt-slot-clear" style="visibility: visible;">✕</button></div><input type="url" class="yt-slot-input" placeholder="YouTube URL…" __h2d_shadowroot="271" /></div><div class("yt-slot-top"><button class("yt-slot-btn" title("Play">4</button><input type("text" class("yt-slot-name" placeholder("Track 4 name…" __h2d_shadowroot("281" /><button class("yt-slot-clear" style("visibility: visible;">✕</button></div><input type("url" class("yt-slot-input" placeholder("YouTube URL…" __h2d_shadowroot("289" /></div><div class("yt-slot"><div class("yt-slot-top"><button class("yt-slot-btn" title("Play">5</button><input type("text" class("yt-slot-name" placeholder("Track 5 name…" __h2d_shadowroot("299" /><button class("yt-slot-clear" style("visibility: visible;">✕</button></div><input type("url" class("yt-slot-input" placeholder("YouTube URL…" __h2d_shadowroot("307" /></div></div>
+        <div class("yt-preview">
+            <iframe id("ytModalPreview" width("100%" height("100%" src("about:blank" frameborder("0" allow("autoplay; encrypted-media" allowfullscreen("" class("").
+        </div>
+    </div>
+</div>
+
+<script class="">
+// ── BACKGROUND WAVE SYSTEM ───────────────────────────────────
+(function () {
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    let W, H, t = 0;
+
+    const ORBS = [
+        { bx:0.18, by:0.30, r:460 }, { bx:0.75, by:0.68, r:400 },
+        { bx:0.50, by:0.08, r:360 }, { bx:0.90, by:0.22, r:320 },
+        { bx:0.28, by:0.82, r:380 },
+    ].map((o,i) =&gt; ({ ...o, phase: i*1.2, speed: 0.00016 + i*0.000025 }));
+
+    function strand(yBase, ampPx, speedMul, alpha, lw) {
+        return { yBase, alpha, lw,
+            drift: { amp: 38 + Math.random()*55, spd: 0.00055 + Math.random()*0.00060, p: Math.random()*6.28 },
+            h: [
+                { f:0.00110, a:1.00*ampPx, s: 0.00130*speedMul, p:Math.random()*6.28, d: 1 },
+                { f:0.00240, a:0.60*ampPx, s: 0.00200*speedMul, p:Math.random()*6.28, d:-1 },
+                { f:0.00500, a:0.32*ampPx, s: 0.00340*speedMul, p:Math.random()*6.28, d: 1 },
+                { f:0.00950, a:0.16*ampPx, s: 0.00560*speedMul, p:Math.random()*6.28, d:-1 },
+            ],
+        };
+    }
+
+    const STRANDS = [
+        strand(0.90,75,0.60,0.031,1.5), strand(0.82,68,0.68,0.040,1.5),
+        strand(0.74,62,0.76,0.053,1.4), strand(0.65,56,0.84,0.065,1.3),
+        strand(0.57,50,0.93,0.074,1.2), strand(0.48,44,1.03,0.084,1.1),
+        strand(0.40,38,1.14,0.087,1.0), strand(0.32,32,1.26,0.081,0.9),
+        strand(0.23,26,1.40,0.071,0.8), strand(0.15,20,1.56,0.059,0.7),
+        strand(0.07,14,1.74,0.043,0.6),
+    ];
+
+    function wy(s, x) {
+        return s.h.reduce((acc,h) =&gt; acc + h.a * Math.sin(x*h.f + t*h.s*h.d + h.p), 0);
+    }
+
+    function resize() { W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+
+    function draw() {
+        t += 1;
+        ctx.clearRect(0,0,W,H);
+        ORBS.forEach((o,i) =&gt; {
+            o.phase += o.speed;
+            const cx = (o.bx + Math.sin(o.phase*0.7+i)*0.11) * W;
+            const cy = (o.by + Math.cos(o.phase*0.5+i)*0.08) * H;
+            const gr = ctx.createRadialGradient(cx,cy,0,cx,cy,o.r);
+            gr.addColorStop(0,'rgba(255,255,255,0.0022)');
+            gr.addColorStop(.5,'rgba(255,255,255,0.0006)');
+            gr.addColorStop(1,'rgba(255,255,255,0)');
+            ctx.fillStyle = gr;
+            ctx.beginPath(); ctx.arc(cx,cy,o.r,0,Math.PI*2); ctx.fill();
+        });
+        STRANDS.forEach(s =&gt; {
+            const yC = s.yBase * H + s.drift.amp * Math.sin(t * s.drift.spd + s.drift.p);
+            const pts = [];
+            for (let x=0; x&lt;=W; x+=3) pts.push([x, yC + wy(s,x)]);
+
+            ctx.beginPath();
+            pts.forEach(([x,y],i) =&gt; i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y));
+            ctx.lineTo(W,H+10); ctx.lineTo(0,H+10); ctx.closePath();
+            const amp = s.h[0].a;
+            const gy = ctx.createLinearGradient(0,yC-amp*1.5,0,yC+amp*2.5);
+            gy.addColorStop(0,'rgba(255,255,255,0)');
+            gy.addColorStop(.35,`rgba(255,255,255,${(s.alpha*0.45).toFixed(3)})`);
+            gy.addColorStop(.6,`rgba(255,255,255,${(s.alpha*0.18).toFixed(3)})`);
+            gy.addColorStop(1,'rgba(255,255,255,0)');
+            ctx.fillStyle = gy; ctx.fill();
+
+            ctx.beginPath();
+            pts.forEach(([x,y],i) =&gt; i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y));
+            ctx.strokeStyle = `rgba(255,255,255,${(s.alpha*0.38).toFixed(3)})`;
+            ctx.lineWidth = s.lw*5; ctx.lineJoin = 'round'; ctx.stroke();
+            ctx.strokeStyle = `rgba(255,255,255,${Math.min(s.alpha*1.9,0.58).toFixed(3)})`;
+            ctx.lineWidth = s.lw; ctx.stroke();
+        });
+        requestAnimationFrame(draw);
+    }
+
+    let rt;
+    window.addEventListener('resize', () =&gt; { clearTimeout(rt); rt = setTimeout(resize, 80); });
+    resize(); draw();
+})();
+
+// ── CLOCK &amp; DATE ─────────────────────────────────────────────
+function updateClock() {
+    const now = new Date();
+    document.getElementById('hh').textContent = String(now.getHours()).padStart(2,'0');
+    document.getElementById('mm').textContent = String(now.getMinutes()).padStart(2,'0');
+    document.getElementById('ss').textContent = String(now.getSeconds()).padStart(2,'0');
+    document.getElementById('sr-time').textContent = now.toLocaleTimeString('en-US');
+    document.getElementById('date').textContent = now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}).toUpperCase();
+    document.getElementById('day').textContent  = now.toLocaleDateString('en-US',{weekday:'long'}).toUpperCase();
+    const start = new Date(now.getFullYear(),0,1);
+    const end   = new Date(now.getFullYear()+1,0,1);
+    const elapsed = (now - start) / (end - start) * 100;
+    document.getElementById('yearMsg').textContent = `YOU HAVE ${(100-elapsed).toFixed(1)}% LEFT IN ${now.getFullYear()}`;
+    document.getElementById('bar').style.width = elapsed.toFixed(2) + '%';
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ── FOCUS LIST ───────────────────────────────────────────────
+const TASKS_KEY = 'focusTasks';
+const MAX_TASKS = 5;
+
+function saveTasks() {
+    const items = [...document.querySelectorAll('#todo-list .todo-item')].map(el =&gt; ({
+        text: el.querySelector('.editable-task').textContent.trim(),
+        done: el.classList.contains('done'),
+    }));
+    localStorage.setItem(TASKS_KEY, JSON.stringify(items));
+}
+
+function makeTaskEl(text, done) {
+    const item = document.createElement('div');
+    item.className = 'todo-item' + (done ? ' done' : '');
+    item.setAttribute('role','listitem');
+
+    const check = document.createElement('div');
+    check.className = 'todo-check';
+
+    const span = document.createElement('span');
+    span.className = 'editable-task';
+    span.contentEditable = 'true';
+    span.textContent = text;
+    span.addEventListener('click', e =&gt; e.stopPropagation());
+    span.addEventListener('input', saveTasks);
+    span.addEventListener('blur',  saveTasks);
+
+    const del = document.createElement('button');
+    del.className = 'btn-icon';
+    del.textContent = '✕';
+    del.addEventListener('click', e =&gt; { e.stopPropagation(); item.remove(); saveTasks(); });
+
+    item.append(check, span, del);
+    item.addEventListener('click', () =&gt; { item.classList.toggle('done'); saveTasks(); });
+    return item;
+}
+
+function addTask() {
+    const list = document.getElementById('todo-list');
+    if (list.querySelectorAll('.todo-item').length &gt;= MAX_TASKS) {
+        const btn = document.querySelector('.btn-add');
+        btn.style.color = 'rgba(255,80,80,0.8)';
+        setTimeout(() =&gt; btn.style.color = '', 600);
+        return;
+    }
+    const item = makeTaskEl('New task…', false);
+    list.appendChild(item);
+    const span = item.querySelector('.editable-task');
+    span.focus();
+    document.execCommand('selectAll', false, null);
+    saveTasks();
+}
+
+function loadTasks() {
+    const list = document.getElementById('todo-list');
+    const saved = JSON.parse(localStorage.getItem(TASKS_KEY) || 'null');
+    const defaults = ['Drink 2 liters of water','Meditate for 5 minutes','Smile more','Plan for tomorrow','Say thank you to anything'];
+    (saved || defaults.map(t =&gt; ({ text: t, done: false }))).slice(0, MAX_TASKS).forEach(t =&gt; {
+        list.appendChild(makeTaskEl(t.text, t.done));
+    });
+}
+loadTasks();
+
+// ── YOUTUBE AMBIENT ──────────────────────────────────────────
+const MAX_SLOTS = 5;
+const YT_KEY = 'ytSlots';
+const YT_NAMES_KEY = 'ytNames';
+let activeSlot = -1;
+
+const DEFAULT_TRACKS = [
+    { url: 'https://www.youtube.com/watch?v=iHns46ib0bM', name: 'Lofi Hip Hop Radio' },
+    { url: 'https://www.youtube.com/watch?v=AcJVy0C5WAE', name: 'Jazz Cafe Vibes' },
+    { url: 'https://www.youtube.com/watch?v=hydk9hHO1Ko', name: 'Chillhop Essentials' },
+    { url: 'https://www.youtube.com/watch?v=Yu7zZvH60ag', name: 'Deep Focus Flow' },
+    { url: 'https://www.youtube.com/watch?v=iPo12mEGVfE', name: 'Ambient Study Music' },
+];
+
+function ytIdFromUrl(url) {
+    if (!url) return null;
+    try {
+        const u = new URL(url);
+        if (u.hostname.includes('youtu.be')) return u.pathname.slice(1).split('?')[0];
+        return u.searchParams.get('v') || null;
+    } catch {
+        const m = url.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+        return m ? m[1] : null;
+    }
+}
+
+function loadSlots() {
+    const saved = JSON.parse(localStorage.getItem(YT_KEY) || 'null');
+    return saved ? saved.slice(0, MAX_SLOTS) : DEFAULT_TRACKS.map(t =&gt; t.url);
+}
+function loadNames() {
+    const saved = JSON.parse(localStorage.getItem(YT_NAMES_KEY) || 'null');
+    return saved ? saved.slice(0, MAX_SLOTS) : DEFAULT_TRACKS.map(t =&gt; t.name);
+}
+function saveSlots(s) { localStorage.setItem(YT_KEY, JSON.stringify(s)); }
+function saveNames(n) { localStorage.setItem(YT_NAMES_KEY, JSON.stringify(n)); }
+
+function playSlot(idx) {
+    const id = ytIdFromUrl(loadSlots()[idx]);
+    if (!id) return;
+    activeSlot = idx;
+    document.getElementById('player').src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+    document.getElementById('ytOpenBtn').classList.add('playing');
+    renderSlots();
+}
+
+function renderSlots() {
+    const slots = loadSlots();
+    const names = loadNames();
+    const container = document.getElementById('ytSlots');
+    if (!container) return;
+    container.innerHTML = '';
+
+    for (let i = 0; i &lt; MAX_SLOTS; i++) {
+        const url  = slots[i] || '';
+        const name = names[i] || '';
+        const isActive = i === activeSlot;
+
+        const row = document.createElement('div');
+        row.className = 'yt-slot';
+
+        const top = document.createElement('div');
+        top.className = 'yt-slot-top';
+
+        const btn = document.createElement('button');
+        btn.className = 'yt-slot-btn' + (isActive ? ' active' : '');
+        btn.innerHTML = isActive ? '▶' : (i + 1);
+        btn.title = url ? 'Play' : 'No URL set';
+        btn.onclick = () =&gt; { if (url) playSlot(i); };
+
+        const nameInp = document.createElement('input');
+        nameInp.type = 'text';
+        nameInp.className = 'yt-slot-name' + (isActive ? ' active-name' : '');
+        nameInp.placeholder = `Track ${i + 1} name…`;
+        nameInp.value = name;
+        nameInp.addEventListener('blur', () =&gt; {
+            const n = loadNames();
+            while (n.length &lt;= i) n.push('');
+            n[i] = nameInp.value.trim();
+            saveNames(n);
+        });
+        nameInp.addEventListener('keydown', e =&gt; { if (e.key === 'Enter') nameInp.blur(); });
+
+        const clr = document.createElement('button');
+        clr.className = 'yt-slot-clear';
+        clr.innerHTML = '✕';
+        clr.style.visibility = url ? 'visible' : 'hidden';
+        clr.onclick = () =&gt; {
+            const s = loadSlots(); while (s.length &lt;= i) s.push('');
+            const n = loadNames();  while (n.length &lt;= i) n.push('');
+            s[i] = ''; n[i] = '';
+            saveSlots(s); saveNames(n);
+            if (activeSlot === i) {
+                activeSlot = -1;
+                document.getElementById('player').src = 'about:blank';
+                document.getElementById('ytModalPreview').src = 'about:blank';
+                document.getElementById('ytOpenBtn').classList.remove('playing');
+            }
+            renderSlots();
+        };
+
+        top.append(btn, nameInp, clr);
+
+        const inp = document.createElement('input');
+        inp.type = 'url';
+        inp.className = 'yt-slot-input';
+        inp.placeholder = 'YouTube URL…';
+        inp.value = url;
+        inp.addEventListener('blur', () =&gt; {
+            const v = inp.value.trim();
+            const s = loadSlots(); while (s.length &lt;= i) s.push('');
+            if (s[i] !== v) { s[i] = v; saveSlots(s); renderSlots(); }
+        });
+        inp.addEventListener('keydown', e =&gt; {
+            if (e.key === 'Enter') { inp.blur(); if (inp.value.trim()) playSlot(i); }
+        });
+
+        row.append(top, inp);
+        container.appendChild(row);
+    }
+}
+
+function openYtModal() {
+    renderSlots();
+    if (activeSlot &gt;= 0) {
+        const id = ytIdFromUrl(loadSlots()[activeSlot]);
+        if (id) document.getElementById('ytModalPreview').src = `https://www.youtube.com/embed/${id}?autoplay=0`;
+    }
+    document.getElementById('ytModalBackdrop').classList.add('open');
+}
+
+function closeYtModal(e) {
+    if (e &amp;&amp; e.target !== document.getElementById('ytModalBackdrop')) return;
+    document.getElementById('ytModalPreview').src = 'about:blank';
+    document.getElementById('ytModalBackdrop').classList.remove('open');
+}
+
+(function initAmbience() {
+    const first = loadSlots().findIndex(s =&gt; s);
+    if (first !== -1) playSlot(first); else renderSlots();
+})();
+
+// ── PHOTO UPLOAD (IndexedDB) ──────────────────────────────────
+const DB_NAME = 'CWallpaperDB', DB_VER = 1, STORE = 'assets';
+let db;
+
+function openDB() {
+    return new Promise((res, rej) =&gt; {
+        const req = indexedDB.open(DB_NAME, DB_VER);
+        req.onupgradeneeded = e =&gt; e.target.result.createObjectStore(STORE);
+        req.onsuccess = e =&gt; { db = e.target.result; res(db); };
+        req.onerror   = e =&gt; rej(e.target.error);
+    });
+}
+function dbPut(key, val) {
+    return new Promise((res, rej) =&gt; {
+        const tx = db.transaction(STORE, 'readwrite');
+        tx.objectStore(STORE).put(val, key);
+        tx.oncomplete = res; tx.onerror = e =&gt; rej(e.target.error);
+    });
+}
+function dbGet(key) {
+    return new Promise((res, rej) =&gt; {
+        const tx = db.transaction(STORE, 'readonly');
+        const req = tx.objectStore(STORE).get(key);
+        req.onsuccess = e =&gt; res(e.target.result);
+        req.onerror   = e =&gt; rej(e.target.error);
+    });
+}
+
+async function initPhoto() {
+    await openDB();
+    const blob = await dbGet('userPhoto');
+    if (blob) {
+        document.getElementById('photoContainer').style.backgroundImage = `url(${URL.createObjectURL(blob)})`;
+    }
+}
+initPhoto();
+
+function handlePhotoUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size &gt; 10 * 1024 * 1024) { alert('Ảnh vượt quá 10MB.'); return; }
+    dbPut('userPhoto', file).then(() =&gt; {
+        document.getElementById('photoContainer').style.backgroundImage = `url(${URL.createObjectURL(file)})`;
+    }).catch(() =&gt; alert('Lỗi lưu ảnh. Vui lòng thử lại.'));
+}
+
+// ── PWA SERVICE WORKER ────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+    const sw = `const C='cw-v1';self.addEventListener('install',e=&gt;e.waitUntil(caches.open(C).then(c=&gt;c.addAll(['/'])).then(()=&gt;self.skipWaiting())));self.addEventListener('activate',e=&gt;e.waitUntil(clients.claim()));self.addEventListener('fetch',e=&gt;{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(r=&gt;{caches.open(C).then(c=&gt;c.put(e.request,r.clone()));return r;}).catch(()=&gt;caches.match(e.request)));});`;
+    navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'})),{scope:'/'}).catch(()=&gt;{});
+}
+
+// ── CALENDAR ─────────────────────────────────────────────────
+const today = new Date();
+let navDate = new Date();
+
+function renderCalendar() {
+    const y = navDate.getFullYear(), m = navDate.getMonth();
+    document.getElementById('calMonthYear').textContent =
+        navDate.toLocaleDateString('en-US',{month:'long',year:'numeric'}).toUpperCase();
+    const first = new Date(y,m,1).getDay();
+    const days  = new Date(y,m+1,0).getDate();
+    const prev  = new Date(y,m,0).getDate();
+    const grid  = document.getElementById('calGrid');
+    grid.innerHTML = '';
+    for (let i=first; i&gt;0; i--)
+        grid.innerHTML += `&lt;div class="cal-day other-month"&gt;${prev-i+1}&lt;/div&gt;`;
+    for (let i=1; i&lt;=days; i++) {
+        const isToday = i===today.getDate() &amp;&amp; m===today.getMonth() &amp;&amp; y===today.getFullYear();
+        grid.innerHTML += `&lt;div class="cal-day${isToday?' today':''}"&gt;${i}&lt;/div&gt;`;
+    }
+    const tail = (first+days)%7;
+    if (tail) for (let i=1; i&lt;=7-tail; i++)
+        grid.innerHTML += `&lt;div class="cal-day other-month"&gt;${i}&lt;/div&gt;`;
+}
+function changeMonth(d) { navDate.setMonth(navDate.getMonth()+d); renderCalendar(); }
+renderCalendar();
+</script>
+
+
+<style id="--extension-popup-styles" class="">@import url('https://fonts.googleapis.com/css?family=Inter:400,600&amp;display=swap');</style></body></html>
